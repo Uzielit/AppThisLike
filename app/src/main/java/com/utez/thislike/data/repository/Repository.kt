@@ -18,7 +18,7 @@ class Repository {
             if (response.isSuccessful && response.body() != null) {
                 Result.success(response.body()!!)
             } else {
-                Result.failure(Exception("Error, Algun dato esta mal "))
+                Result.failure(Exception("Ops Datos Incorrectos "))
             }
         } catch (e: Exception) {
             Result.failure(e)

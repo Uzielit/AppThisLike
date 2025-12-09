@@ -30,7 +30,7 @@ class LoginViewModel : ViewModel() {
 
     fun login() {
         if (usuario.value.isEmpty() || password.value.isEmpty()){
-            errorMessage = "Ingresa matrícula y contraseña"
+            errorMessage = "Ingrese usuario y contraseña"
             return
         }
         viewModelScope.launch {

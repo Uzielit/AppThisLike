@@ -26,7 +26,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.utez.thislike.ui.components.FotoCard
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -34,6 +36,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.draw.clip
+import com.utez.thislike.ui.components.ThisLikeButton
 
 @Composable
 fun LoginScreen(
@@ -46,7 +49,7 @@ fun LoginScreen(
     val password by viewModel.password.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val loginResult by viewModel.loginResult.collectAsState()
-    //Pra vigilar la navegacion
+
     LaunchedEffect(loginResult) {
         if (loginResult?.isSuccess == true) {
             onLoginSuccess()
@@ -56,13 +59,19 @@ fun LoginScreen(
     Column (
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.White)
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
+
+
+
         LogoApp(imageRes = R.drawable.gato2)
-        Text("Iniciar Sesión", style = MaterialTheme.typography.headlineLarge)
         Spacer(modifier = Modifier.height(32.dp))
+        Text("Bienvenido", style = MaterialTheme.typography.headlineLarge)
+        Spacer(modifier = Modifier.height(32.dp))
+
 
 
         ThisLikeInput(
@@ -71,6 +80,7 @@ fun LoginScreen(
             label = "Usuario"
         )
         Spacer(modifier = Modifier.height(18.dp))
+
         ThisLikeInput(
             value = password,
             onValueChange = viewModel::onPasswordChange,
@@ -80,27 +90,23 @@ fun LoginScreen(
 
         if (viewModel.errorMessage != null) {
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = viewModel.errorMessage!!,
-                color = MaterialTheme.colorScheme.error
-            )
-            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = viewModel.errorMessage!!, color = MaterialTheme.colorScheme.error)
         }
+        Spacer(modifier = Modifier.height(32.dp))
 
         if (isLoading) {
             CircularProgressIndicator()
         } else {
-            Button(
+            ThisLikeButton(
+                text = "Iniciar Sesion",
                 onClick = { viewModel.login() },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Ingresar")
-            }
+                modifier = Modifier.width(250.dp)
+            )
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         TextButton(onClick = onNavigateToRegister) {
-            Text("¿No tienes cuenta? Regístrate aquí")
+            Text("¿No tienes cuenta? Regístrate aquí", color = Color.Blue)
         }
     }
 

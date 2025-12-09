@@ -1,5 +1,7 @@
 package com.utez.thislike.ui.screens
 
+import android.R.attr.password
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -47,12 +49,27 @@ fun RegistroScreen(
     }
 
     Scaffold(
+        containerColor = Color.White,
         topBar = {
-            TopAppBar(
-                title = { Text("Crear Cuenta") },
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Crear Cuenta",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color.White
+                ),
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Atrás")
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Atrás",
+                            tint = Color.Black
+                        )
                     }
                 }
             )
@@ -64,6 +81,7 @@ fun RegistroScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(24.dp)
+                .background(Color.White)
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -73,7 +91,7 @@ fun RegistroScreen(
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Box(
@@ -81,13 +99,24 @@ fun RegistroScreen(
                         .border(2.dp, Color.Black, CircleShape)
                         .padding(4.dp)
                 ) {
-                    UserAvatar(fotoString = fotoActual, size = 100.dp)
+                    UserAvatar(fotoString = fotoActual, size = 140.dp)
                 }
+                Spacer(modifier = Modifier.width(24.dp))
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     //Aqui esta esperando la galeria
-                    OutlinedButton(onClick = { }) {
-                        Icon(Icons.Default.Image, contentDescription = null, modifier = Modifier.size(16.dp))
+                    OutlinedButton(onClick = {
+
+                    },
+                        border = BorderStroke(1.dp, Color.Black),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = Color.Black
+                        )) {
+                            Icon(
+                                imageVector = Icons.Default.Image,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp)
+                            )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text("Galería", fontSize = 12.sp)
                     }
@@ -104,7 +133,7 @@ fun RegistroScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(90.dp))
 
             ThisLikeInput(
                 value = nombre,
@@ -135,21 +164,22 @@ fun RegistroScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(160.dp))
 
             if (isLoading) {
                 CircularProgressIndicator()
             } else {
                 ThisLikeButton(
                     text = "Registrarme",
-                    onClick = { viewModel.registrar() }
+                    onClick = { viewModel.registrar() },
+                    modifier = Modifier.width(250.dp)
                 )
             }
         }
     }
 }
 
-// Componente chiquito para los circulitos seleccionables
+//Funion para los avatrare
 @Composable
 fun AvatarOpcion(
     nombreAvatar: String,
@@ -163,8 +193,8 @@ fun AvatarOpcion(
             .size(40.dp)
             .clip(CircleShape)
             .clickable { onSelect(nombreAvatar) }
-            .background(if (esElSeleccionado) Color.LightGray else Color.Transparent) // Resaltar si está seleccionado
-            .padding(2.dp) // Margen interno
+            .background(if (esElSeleccionado) Color.LightGray else Color.Transparent)
+            .padding(2.dp)
     ) {
         UserAvatar(fotoString = nombreAvatar, size = 40.dp)
     }

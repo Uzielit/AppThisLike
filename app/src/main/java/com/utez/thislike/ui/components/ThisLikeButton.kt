@@ -28,7 +28,6 @@ fun ThisLikeButton(
         ),
         shape = RoundedCornerShape(12.dp),
         modifier = modifier
-            .fillMaxWidth()
             .height(50.dp)
     ) {
         Text(text = text, color = Color.White)

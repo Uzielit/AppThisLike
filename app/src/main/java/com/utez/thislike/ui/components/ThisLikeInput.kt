@@ -25,6 +25,7 @@ fun ThisLikeInput(
     isError: Boolean = false,
     errorMessage: String? = null
 ) {
+    val Azul = Color(0xFF007AFF)
     Column(modifier = modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = value,
@@ -37,11 +38,18 @@ fun ThisLikeInput(
             visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
 
             shape = RoundedCornerShape(12.dp),
+
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.Black,
-                unfocusedBorderColor = Color.Gray,
+                focusedContainerColor = Color.White,
+                focusedBorderColor = Azul,
+                focusedLabelColor = Azul,
+                cursorColor = Azul,
+                unfocusedContainerColor = Color.White,
+                unfocusedBorderColor = Color.LightGray,
+                unfocusedLabelColor = Color.Gray,
+
                 errorBorderColor = Color.Red,
-                cursorColor = Color.Black
+                errorLabelColor = Color.Red
             ),
             modifier = Modifier.fillMaxWidth()
         )
