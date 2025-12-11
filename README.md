@@ -13,7 +13,7 @@
 | :--- | :--- | :--- |
 | Abraham Rendon Uziel Alberto  | BackEnd,Retrofit | @uzielit |
 | Muñiz Granda Jetzemany | Sensores,FrontEnd | @usuario2 |
-| Zagal Garcia Diego | Logica,Repositorio | @usuario3 |
+| Zagal Garcia Diego | Logica,Repositorio | @diego19zagal |
 
 ---
 
