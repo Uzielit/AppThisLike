@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.utez.thislike.data.model.SessionManager
 import com.utez.thislike.data.model.User
 import com.utez.thislike.data.repository.Repository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,10 +38,16 @@ class LoginViewModel : ViewModel() {
             _isLoading.value = true
             errorMessage = null
             val resultado = repository.login(usuario.value, password.value)
-            _loginResult.value = resultado
-            if (resultado.isFailure) {
+
+            if (resultado.isSuccess) {
+                val userLogueado = resultado.getOrNull()
+                if (userLogueado != null) {
+                    SessionManager.currentUser = userLogueado
+                }
+            } else {
                 errorMessage = resultado.exceptionOrNull()?.message
             }
+            _loginResult.value = resultado
             _isLoading.value = false
         }
     }

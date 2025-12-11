@@ -11,6 +11,6 @@ data class Foto(
 
     val descripcion: String,
     val categoria: String,
-    val likes: Int = 0,
+    var likes: Int = 0,
     val fecha: String? = null
 )

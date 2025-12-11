@@ -1,6 +1,8 @@
 package com.utez.thislike.ui.screens
 
-import android.R.attr.password
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,7 +27,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.utez.thislike.ViewModel.RegistroViewModel
 import com.utez.thislike.ui.components.ThisLikeButton
 import com.utez.thislike.ui.components.ThisLikeInput
-import com.utez.thislike.ui.components.UserAvatar
+import com.utez.thislike.ui.components.UserFotoPerfil
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,12 +38,22 @@ fun RegistroScreen(
     val viewModel: RegistroViewModel = viewModel()
 
 
+
     val nombre by viewModel.nombre.collectAsState()
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
     val fotoActual by viewModel.fotoPerfil.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val registroExitoso by viewModel.registroExitoso.collectAsState()
+
+
+    val context = LocalContext.current
+    val abrirGaleria= rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+        ) { uri: Uri? ->
+        viewModel.abrirGaleria(context, uri)
+    }
+
 
     LaunchedEffect(registroExitoso) {
         if (registroExitoso) {
@@ -99,19 +112,20 @@ fun RegistroScreen(
                         .border(2.dp, Color.Black, CircleShape)
                         .padding(4.dp)
                 ) {
-                    UserAvatar(fotoString = fotoActual, size = 140.dp)
+                    UserFotoPerfil(fotoString = fotoActual, size = 140.dp)
                 }
                 Spacer(modifier = Modifier.width(24.dp))
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    //Aqui esta esperando la galeria
-                    OutlinedButton(onClick = {
-
-                    },
+                    //Aqui abre la galeria
+                    OutlinedButton(
+                        onClick = {
+                            abrirGaleria.launch("image/*") },
                         border = BorderStroke(1.dp, Color.Black),
                         colors = ButtonDefaults.outlinedButtonColors(
                             contentColor = Color.Black
                         )) {
+
                             Icon(
                                 imageVector = Icons.Default.Image,
                                 contentDescription = null,
@@ -122,7 +136,7 @@ fun RegistroScreen(
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
-                    Text("O elige uno:", fontSize = 12.sp, color = Color.Gray)
+                    Text("O elige :", fontSize = 12.sp, color = Color.Gray)
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -179,7 +193,7 @@ fun RegistroScreen(
     }
 }
 
-//Funion para los avatrare
+//Funion para la foto de perfil
 @Composable
 fun AvatarOpcion(
     nombreAvatar: String,
@@ -196,6 +210,6 @@ fun AvatarOpcion(
             .background(if (esElSeleccionado) Color.LightGray else Color.Transparent)
             .padding(2.dp)
     ) {
-        UserAvatar(fotoString = nombreAvatar, size = 40.dp)
+        UserFotoPerfil(fotoString = nombreAvatar, size = 40.dp)
     }
 }

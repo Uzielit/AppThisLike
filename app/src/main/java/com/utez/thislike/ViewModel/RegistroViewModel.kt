@@ -1,5 +1,7 @@
 package com.utez.thislike.ViewModel
 
+import android.R.attr.text
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,11 +13,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.UUID
+import android.content.Context
+import android.util.Base64
 
 class RegistroViewModel : ViewModel() {
     private val repository = Repository()
-
-
     var nombre = MutableStateFlow("")
     var email = MutableStateFlow("")
     var password = MutableStateFlow("")
@@ -37,6 +39,21 @@ class RegistroViewModel : ViewModel() {
     fun onEmailChange(text: String) { email.value = text }
     fun onPasswordChange(text: String) { password.value = text }
 
+    //Recien agregada
+    fun abrirGaleria(context: Context, uri: Uri?) {
+        if (uri == null) return
+
+        try {
+            val inputStream = context.contentResolver.openInputStream(uri)
+            val bytes = inputStream?.readBytes()
+            if (bytes != null) {
+                val base64String = Base64.encodeToString(bytes, Base64.NO_WRAP)
+                fotoPerfil.value = base64String
+            }
+        } catch (e: Exception) {
+            errorMessage = "Error al procesar imagen"
+        }
+    }
 
     fun onAvatarSelected(avatarCode: String) {
         fotoPerfil.value = avatarCode
@@ -57,7 +74,7 @@ class RegistroViewModel : ViewModel() {
                 nombre = nombre.value,
                 email = email.value,
                 password = password.value,
-                biografia = "Prueba de la BD",
+                biografia = "",
                 fotoPerfil = fotoPerfil.value
             )
 

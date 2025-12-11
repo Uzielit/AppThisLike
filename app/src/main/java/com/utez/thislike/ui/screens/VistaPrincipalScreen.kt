@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.utez.thislike.ViewModel.VistaPrincipalViewModel
+import com.utez.thislike.data.model.SelectionManager.fotoSeleccionada
 import com.utez.thislike.ui.components.FotoCard
 import com.utez.thislike.ui.AppScreens
 
@@ -32,9 +33,7 @@ fun VistaPrincipalScreen(navController: NavController) {
     val viewModel: VistaPrincipalViewModel = viewModel()
     val fotos by viewModel.fotos.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
-
-
-    val AzulApple = Color(0xFF007AFF)
+    val Azul = Color(0xFF007AFF)
 
     Scaffold(
         containerColor = Color.White,
@@ -79,9 +78,9 @@ fun VistaPrincipalScreen(navController: NavController) {
                         selected = true,
                         onClick = { },
                         colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = AzulApple,
+                            selectedIconColor = Azul,
                             unselectedIconColor = Color.Gray,
-                            indicatorColor = AzulApple.copy(alpha = 0.1f)
+                            indicatorColor = Azul.copy(alpha = 0.1f)
                         )
                     )
 
@@ -143,7 +142,7 @@ fun VistaPrincipalScreen(navController: NavController) {
             if (isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
-                    color = AzulApple
+                    color = Azul
                 )
             } else {
                 if (fotos.isEmpty()) {
@@ -160,7 +159,13 @@ fun VistaPrincipalScreen(navController: NavController) {
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         content = {
                             items(fotos) { foto ->
-                                FotoCard(foto = foto, onClick = {})
+                                FotoCard(foto = foto, onClick = {
+                                    fotoSeleccionada = foto
+                                    navController.navigate(AppScreens.FotoScreen.route)
+
+
+
+                                })
                             }
                         }
                     )

@@ -14,7 +14,10 @@ interface ApiService {
     @POST("api/usuarios/login")
     suspend fun loginUsuario(@Body request: LoginRequest): Response<User>
     @PUT("api/usuarios/update/{id}")
-    suspend fun actualizarUsuario(@Path("id") id: String, @Body data: Map<String, Any>): Response<User>
+    suspend fun actualizarUsuario(@Path("id") id: String, @Body data: Map<String, @JvmSuppressWildcards Any>): Response<User>
+
+    @DELETE("api/usuarios/delete/{id}")
+    suspend fun eliminarUsuario(@Path("id") id: String): Response<Map<String, String>>
 
     //Fotos
 
@@ -23,7 +26,8 @@ interface ApiService {
     @POST("posts")
     suspend fun subirFoto(@Body foto: Foto): Response<Foto>
     @PUT("posts/{id}")
-    suspend fun editarFoto(@Path("id") id: String, @Body data: Map<String, Any>): Response<Foto>
+    suspend fun editarFoto(@Path("id") id: String, @Body data: Map<String, @JvmSuppressWildcards Any>): Response<Foto>
     @DELETE("posts/{id}")
     suspend fun eliminarFoto(@Path("id") id: String): Response<Map<String, String>>
+
 }

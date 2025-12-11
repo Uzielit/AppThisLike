@@ -31,7 +31,7 @@ class Repository {
             if (response.isSuccessful) {
                 Result.success("Usuario creado")
             } else {
-                Result.failure(Exception("Error al registrar"))
+                Result.failure(Exception("Ups revisa los datos tal vez ya existen"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -86,4 +86,37 @@ class Repository {
             Result.failure(e)
         }
     }
+
+
+    suspend fun eliminarUsuario(id: String): Result<Boolean> {
+        return try {
+            val response = api.eliminarUsuario(id)
+            if (response.isSuccessful) {
+                Result.success(true)
+            } else {
+                Result.failure(Exception("Error al eliminar usuario"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+
+    suspend fun actualizarFoto(id: String, datos: Map<String, Any>): Result<Foto> {
+        return try {
+            val response = api.editarFoto(
+                id = id,
+                data = datos
+            )
+            if (response.isSuccessful && response.body() != null) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(Exception("Error al actualizar"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+
 }
