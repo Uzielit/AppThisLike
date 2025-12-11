@@ -127,13 +127,3 @@ fun LogoApp(imageRes: Int, size: Int = 150) {
             .border(BorderStroke(2.dp, Color.LightGray), appleShape)
     )
 }
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    MaterialTheme {
-        LoginScreen(
-            onLoginSuccess = {},
-            onNavigateToRegister = {}
-        )
-    }
-}

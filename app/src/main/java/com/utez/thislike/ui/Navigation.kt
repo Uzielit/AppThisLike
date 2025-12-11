@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.utez.thislike.ui.screens.*
 
-//Se define la rura a donde ira
+//Se define la rura a donde ira creamos el objeto
 sealed class AppScreens(val route: String) {
     object Login : AppScreens("login")
     object Registro : AppScreens("registro")
@@ -15,6 +15,11 @@ sealed class AppScreens(val route: String) {
     object Buscar : AppScreens("buscar")
     object Agregar : AppScreens("agregar")
     object Cuenta : AppScreens("cuenta")
+    object Editar : AppScreens("editar")
+    object FotoScreen : AppScreens("foto")
+
+    object EditarPerfil : AppScreens("editarPerfil")
+
 }
 
 
@@ -51,6 +56,30 @@ fun Navigation (){
         composable(AppScreens.VistaPrincipal.route) {
             VistaPrincipalScreen(navController)
         }
+        composable(AppScreens.Agregar.route) {
+            AgregarScreen(navController)
+        }
+        composable(AppScreens.Cuenta.route) {
+            CuentaScreen(navController)
+        }
+        composable(AppScreens.Buscar.route) {
+            BuscarScreen(navController)
+        }
+
+        composable(AppScreens.Editar.route) {
+            EditarFotoScreen(navController)
+        }
+
+        composable (AppScreens.FotoScreen.route){
+            FotoScreen(navController)
+        }
+
+        composable (AppScreens.EditarPerfil.route){
+            EditarPerfilScreen(navController)
+        }
+
+
+
 
 
 

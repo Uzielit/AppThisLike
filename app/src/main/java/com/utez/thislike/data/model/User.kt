@@ -7,5 +7,5 @@ data class User(
     val password: String,
     val biografia: String,
     val fotoPerfil: String,
-    val postGuardados: List<String> = emptyList()
+    var postGuardados: ArrayList<String> = arrayListOf()
 )

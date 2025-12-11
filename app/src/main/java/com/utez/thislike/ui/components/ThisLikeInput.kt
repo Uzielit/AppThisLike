@@ -25,7 +25,7 @@ fun ThisLikeInput(
     isError: Boolean = false,
     errorMessage: String? = null
 ) {
-    val Azul = Color(0xFF007AFF)
+    val Azul = Color(0xFF2B6FD4)
     Column(modifier = modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = value,
@@ -40,6 +40,8 @@ fun ThisLikeInput(
             shape = RoundedCornerShape(12.dp),
 
             colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = Color.Black,
+                unfocusedTextColor = Color.Black,
                 focusedContainerColor = Color.White,
                 focusedBorderColor = Azul,
                 focusedLabelColor = Azul,
@@ -47,7 +49,6 @@ fun ThisLikeInput(
                 unfocusedContainerColor = Color.White,
                 unfocusedBorderColor = Color.LightGray,
                 unfocusedLabelColor = Color.Gray,
-
                 errorBorderColor = Color.Red,
                 errorLabelColor = Color.Red
             ),
