@@ -53,9 +53,7 @@ Este proyecto ha sido desarrollado siguiendo estrictamente los lineamientos de l
 
 | Pantalla de Inicio | Operación CRUD | Uso del Sensor |
 | :---:| :---: | :---: |
-| !![LoginThisLike](https://github.com/user-attachments/assets/adf85f17-380b-4fe6-a73b-c6ed37da6fee) |! ![Crud](https://github.com/user-attachments/assets/155cbaf2-a7b3-4b3a-86a4-5d2810f1d18f)
-
-| ![UsoSensor](https://github.com/user-attachments/assets/b4d58245-0d3d-46f1-a5f1-8293781dea9d) |
+| ![LoginThisLike](https://github.com/user-attachments/assets/adf85f17-380b-4fe6-a73b-c6ed37da6fee) | ![Crud](https://github.com/user-attachments/assets/155cbaf2-a7b3-4b3a-86a4-5d2810f1d18f)| ![UsoSensor](https://github.com/user-attachments/assets/b4d58245-0d3d-46f1-a5f1-8293781dea9d) |
 
 ---
 
